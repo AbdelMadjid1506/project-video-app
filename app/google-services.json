@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "71834464294",
+    "firebase_url": "https://appwebrtc-1905b-default-rtdb.firebaseio.com",
+    "project_id": "appwebrtc-1905b",
+    "storage_bucket": "appwebrtc-1905b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71834464294:android:96a95e2755fa2ff37b76e7",
+        "android_client_info": {
+          "package_name": "com.example.agoraapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71834464294-utk719u9t4v6ra46fs9ageq2ia9k1n6j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClXTEB4a8gs5xMc8Ed3FXztXs6Ik6yNBU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71834464294-utk719u9t4v6ra46fs9ageq2ia9k1n6j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
