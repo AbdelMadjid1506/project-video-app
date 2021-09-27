@@ -3,10 +3,12 @@ package com.example.agoraapp.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -17,9 +19,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.agoraapp.CallingActivity;
+import com.example.agoraapp.InCallActivity;
 import com.example.agoraapp.Models.User;
 import com.example.agoraapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -61,29 +66,31 @@ public class UsersRecyclerView extends RecyclerView.Adapter<UsersRecyclerView.Vi
         holder.tv_phoneNumber.setText(user.getEmail());
 
 
-      /*  holder.layout.setOnClickListener(new View.OnClickListener() {
+        holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Map<String, Object> callsMap= new HashMap<>();
 
-                callsMap.put("Caller", FirebaseAuth.getInstance().getUid());
+                callsMap.put("Caller", "test");
                 callsMap.put("Receiver", user.getuId());
-                FirebaseFirestore.getInstance().collection("Calls").add(callsMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
+                callsMap.put("token","0064150416d65534a7e8c54b25f5192a37fIAA+FWUHsxGIzX2R2v9VX/Y56d2FIzvpYX1HEL783IQEkwx+f9gAAAAAEABekxT0+elSYQEAAQD66VJh");
 
+
+                FirebaseFirestore.getInstance().collection("Calls").document(user.getuId()).set(callsMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        Bundle bundle= new Bundle();
+                        bundle.putString("token","0064150416d65534a7e8c54b25f5192a37fIAA+FWUHsxGIzX2R2v9VX/Y56d2FIzvpYX1HEL783IQEkwx+f9gAAAAAEABekxT0+elSYQEAAQD66VJh");
+                        bundle.putString("channelName", "test");
+                        Intent intent= new Intent(context,  InCallActivity.class);
+                        intent.putExtras(bundle);
+                        context.startActivity(intent);
                     }
                 });
             }
-        });*/
-        holder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent= new Intent(context, CallingActivity.class);
-                context.startActivity(intent);
-
-            }
         });
+
 
 
     }
@@ -106,6 +113,9 @@ public class UsersRecyclerView extends RecyclerView.Adapter<UsersRecyclerView.Vi
             layout =itemView.findViewById(R.id.ll_item_user);
             tv_name = itemView.findViewById(R.id.name_user);
             tv_phoneNumber = itemView.findViewById(R.id.phoneNumber_user);
+
+
+
 
 
 

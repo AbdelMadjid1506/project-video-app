@@ -20,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AgoraApp">
         <activity
+            android:name=".InCallActivity"
+            android:exported="true" />
+        <activity
             android:name=".IncomingCallActivity"
             android:exported="true" />
         <activity

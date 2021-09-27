@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.agoraapp.Adapters.UsersRecyclerView;
 import com.example.agoraapp.Models.User;
@@ -73,9 +74,28 @@ public class AllUsersActivity extends AppCompatActivity {
         FirebaseFirestore.getInstance().collection("Calls").whereEqualTo("Receiver", FirebaseAuth.getInstance().getUid()).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                assert value != null;
                 if(!value.isEmpty()){
-                    Intent intent= new Intent(getApplicationContext(), IncomingCallActivity.class);
-                    startActivity(intent);
+
+                    for(DocumentChange documentChange: value.getDocumentChanges()){
+                        String key= documentChange.getDocument().getString("Caller");
+                        String token= documentChange.getDocument().getString("token");
+
+                        Bundle bundle= new Bundle();
+                        bundle.putString("token", token);
+                        bundle.putString("channelName", key);
+                        Log.d("listener", "onEvent: "+ token);
+                        Log.d("listener", "onEvent: "+ key);
+
+                        Intent intent= new Intent(getApplicationContext(), IncomingCallActivity.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+
+
+
+
+
                 }
             }
         });
